@@ -29,7 +29,7 @@
 *   scrollbars are bind to object moving and in reverse
 *
 *   v3.3
-*   scrollbars are max 1/4 of the parent container like in PhotoShop
+*   scrollbars are max 1/4 of the parent container like in PhotoShop 
 *
 *   v3.2
 *   Unique zoom level value is displayed in selectbox
