@@ -1095,21 +1095,7 @@
             }
 
             /*ELEMENTS WITH DEFINED CLASS WON'T BE SCALED*/
-            for (var prop = 0; prop < settings.exceptionsZoom.length; prop++) {
-                $('.' + settings.elementClass + ' .' + settings.exceptionsZoom[prop]).each(function() {
-                    $(this).css({
-                        "transform": "scale(" + 1 / settings.zoomLevel + ")",
-                        "-webkit-transform": "scale(" + 1 / settings.zoomLevel + ")",
-                        "-moz-transform": "scale(" + 1 / settings.zoomLevel + ")",
-                        "-ms-transform": "scale(" + 1 / settings.zoomLevel + ")",
-                        "-o-transform": "scale(" + 1 / settings.zoomLevel + ")"
-                        /*
-                        "filter": "progid:DXImageTransform.Microsoft.Matrix(M11=" + 1/settings.zoomLevel + ", M12=0, M21=0, M22=" + 1/settings.zoomLevel + ", SizingMethod='auto expand')",
-                        "-ms-filter": "progid:DXImageTransform.Microsoft.Matrix(M11=" + 1/settings.zoomLevel + ", M12=0, M21=0, M22=" + 1/settings.zoomLevel + ", SizingMethod='auto expand')",
-                        */
-                    });
-                });
-            }
+            resizeZoomExceptions();
 
             setExternalZoomSelect(settings.zoomLevel);
 
@@ -1123,7 +1109,36 @@
 
         }
 
+	function resizeZoomExceptions(){
+            /*ELEMENTS WITH DEFINED CLASS WON'T BE SCALED*/
+            for (var prop = 0; prop < settings.exceptionsZoom.length; prop++) {
+                $('.' + settings.elementClass + ' .' + settings.exceptionsZoom[prop]).each(function() {
+                    var thisOffsetDatas = {
+                        left: $(this).css('left'),
+                        top: $(this).css('top'),
+                        width: $(this).width(),
+                        height: $(this).height(),
+                    };
 
+
+                    $(this).css({
+                        "transform": "scale(" + 1 / settings.zoomLevel + ")",
+                        "-webkit-transform": "scale(" + 1 / settings.zoomLevel + ")",
+                        "-moz-transform": "scale(" + 1 / settings.zoomLevel + ")",
+                        "-ms-transform": "scale(" + 1 / settings.zoomLevel + ")",
+                        "-o-transform": "scale(" + 1 / settings.zoomLevel + ")"
+                        /*
+                        "filter": "progid:DXImageTransform.Microsoft.Matrix(M11=" + 1/settings.zoomLevel + ", M12=0, M21=0, M22=" + 1/settings.zoomLevel + ", SizingMethod='auto expand')",
+                        "-ms-filter": "progid:DXImageTransform.Microsoft.Matrix(M11=" + 1/settings.zoomLevel + ", M12=0, M21=0, M22=" + 1/settings.zoomLevel + ", SizingMethod='auto expand')"
+                        */
+
+                        //"left": (thisOffsetDatas.width),
+                        //"top": "",
+                    });
+                });
+            }
+
+        }
         /*****************************************************
     	 * INIT function
     	 * After page is loaded need to align the area
@@ -1183,6 +1198,9 @@
 
             // VISIBILITY: HIDDEN will be replaced back to DISPLAY:NONE
             changeVisibilityMethod('changeBack');
+		
+	    /*ELEMENTS WITH DEFINED CLASS WON'T BE SCALED*/
+            resizeZoomExceptions();
 
         }
 
