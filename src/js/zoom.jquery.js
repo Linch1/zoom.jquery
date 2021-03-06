@@ -1195,7 +1195,7 @@
             });
 
             if (settings.parent_width - 50 > settings.width > settings.parent_width + 50 || 
-                settings.parent_height - 50 > settings.height > settings.parent_height) {
+                settings.parent_height - 50 > settings.height > settings.parent_height + 50) {
                 zoomingToFit(_element);
             }
 
