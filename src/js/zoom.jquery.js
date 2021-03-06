@@ -1189,7 +1189,7 @@
                 "filter": "progid:DXImageTransform.Microsoft.Matrix(M11=" + settings.zoomLevel + ", M12=0, M21=0, M22=" + settings.zoomLevel + ", SizingMethod='auto expand')",
                 "-ms-filter": "progid:DXImageTransform.Microsoft.Matrix(M11=" + settings.zoomLevel + ", M12=0, M21=0, M22=" + settings.zoomLevel + ", SizingMethod='auto expand')",
                 */
-
+		"transform-origin": "top left",
                 "left": settings.left + 'px',
                 "top": settings.top + 'px'
             });
