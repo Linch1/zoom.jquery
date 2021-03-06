@@ -1151,7 +1151,9 @@
             changeVisibilityMethod('change');
 
             /* set element to centre and ZOOM level set to default */
+            let intialZoom = settings.zoomLevel;
             resetSettings();
+            settings.zoomLevel = intialZoom;
             setParentOverflow();
             setVirtualScrollbars();
 
