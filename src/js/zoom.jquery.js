@@ -930,32 +930,21 @@
             }
 
             if(settings.mouseSensibleZoom){
-
-	            /*CALCULATING LEFT POSITION*/
-	            var h_center1_1 = settings.left + (settings.width / 2);
-	            var h_left2_1 = h_center1_1 - (settings.width * previousZoomLevel / 2);
-	            var h_dist_Mouse_Left2_1 = currentMousePos.x - settings.parent_left - h_left2_1;
-	            var h_dist_Mouse_Left1_1 = h_dist_Mouse_Left2_1 / previousZoomLevel;
-
-	            var h_dist_Mouse_Left2_2 = h_dist_Mouse_Left1_1 * settings.zoomLevel;
-	            var h_width2_2 = settings.width * settings.zoomLevel;
-	            var h_center2_2 = currentMousePos.x - settings.parent_left - h_dist_Mouse_Left2_2 + (h_width2_2 / 2);
-	            var h_left1_2 = h_center2_2 - (settings.width / 2);
-
-	            settings.left = h_left1_2;
-
-	            /*CALCULATING TOP POSITION*/
-	            var v_center1_1 = settings.top + (settings.height / 2);
-	            var v_top2_1 = v_center1_1 - (settings.height * previousZoomLevel / 2);
-	            var v_dist_Mouse_Top2_1 = currentMousePos.y - settings.parent_top - v_top2_1;
-	            var v_dist_Mouse_Top1_1 = v_dist_Mouse_Top2_1 / previousZoomLevel;
-
-	            var v_dist_Mouse_Top2_2 = v_dist_Mouse_Top1_1 * settings.zoomLevel;
-	            var v_height2_2 = settings.height * settings.zoomLevel;
-	            var v_center2_2 = currentMousePos.y - settings.parent_top - v_dist_Mouse_Top2_2 + (v_height2_2 / 2);
-	            var v_top1_2 = v_center2_2 - (settings.height / 2);
-
-	            settings.top = v_top1_2;
+                /* CALCULATING ZOOM DIFFERENZE TO EMULATE TRANSFORM ORIGIN */
+                let zoomDifference = settings.zoomLevel - previousZoomLevel;
+                let heightZoomDifference = settings.height * zoomDifference;
+                let widthZoomDifference = settings.width * zoomDifference;
+                /* CALCULATING MOUSE POSITION (in px) RELATIVE TO THE ZOOMED OBJECT */
+                let mouseLeftRelativeToImage = currentMousePos.x - settings.left;
+                let mouseTopRelativeToImage = currentMousePos.y - settings.top;  
+                /* CALCULATING MOUSE POSITION (in %) RELATIVE TO THE ZOOMED OBJECT */
+                let currentWidth = settings.width * previousZoomLevel;
+                let currentHeight = settings.height * previousZoomLevel;
+                let mouseLeftPercentageRelativeToImage = (mouseLeftRelativeToImage / currentWidth) * 100;
+                let mouseTopPercentageRelativeToImage = (mouseTopRelativeToImage / currentHeight) * 100;       
+                /* EDITING TOP AND LEFT TO MAKE THE ZOOM OBJECT CENTERED AT THE MOUSE POSITION */
+                settings.top = settings.top - ( heightZoomDifference * mouseTopPercentageRelativeToImage / 100 );
+                settings.left = settings.left - ( widthZoomDifference * mouseLeftPercentageRelativeToImage / 100 );
             }
 
             /*hide elements if needed*/
